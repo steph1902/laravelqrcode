@@ -12,6 +12,8 @@
 
       google.charts.setOnLoadCallback(drawChart2);
 
+      google.charts.setOnLoadCallback(drawChart3);
+
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
       // draws it.
@@ -30,15 +32,15 @@
 
         for(var i = 0; i < record.length; i++)
         {
-            data.addRow([country[i], visitors[i]]);
+          data.addRow([country[i], visitors[i]]);
 
         }
- 
+
         // Set chart options
         var options = {
-        'title':'Total Visitors by Geographic',
-        'width':400,
-        'height':300};
+          'title':'Total Visitors by Geographic',
+          'width':400,
+          'height':300};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
@@ -63,20 +65,69 @@
 
         for(var i = 0; i < record.length; i++)
         {
-            data.addRow([gagdet[i], visitors[i]]);
+          data.addRow([gagdet[i], visitors[i]]);
 
         }
- 
+
         // Set chart options
         var options = {
-        'title':'Total Visitors by Gagdet',
-        'width':400,
-        'height':300};
+          'title':'Total Visitors by Gagdet',
+          'width':400,
+          'height':300};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('chart_div2'));
         chart.draw(data, options);
       }
+
+      //chart 3
+      function drawChart3()
+      {
+
+        //date,visitors,pageviews
+
+        // 'dailyVisitDate','dailyVisitors','dailyPageView'));
+
+        // Create the data table.
+        // var gagdet = {!! json_encode($gagdet) !!};
+        // var visitors = {!! json_encode($getVisitorByGagdet) !!};
+        // var record = {!! json_encode($getVisitorByGagdet) !!};
+
+        var dailyVisitDate = {!! json_encode($dailyVisitDate) !!};
+        var dailyVisitors = {!!json_encode($dailyVisitors) !!};
+        var dailyPageView = {!!json_encode($dailyPageView) !!};
+
+        var length = dailyVisitDate.length;
+        // console.log(length);
+
+        var data = new google.visualization.DataTable();
+
+        data.addColumn('string', 'Visit Date');
+        data.addColumn('number', 'Visitors');
+        data.addColumn('number', 'PageView');
+
+        // console.log(gagdet);
+
+        for(var i = 0; i < length; i++)
+        {
+          data.addRow([ dailyVisitDate[i], dailyVisitors[i], dailyPageView[i] ]);
+
+        }
+
+        // Set chart options
+        var options = {
+          'title':'Daily Visitors',
+          'width':800,
+          'height':300,
+          'curveType': 'function',
+          };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div3'));
+        chart.draw(data, options);
+      }
+
+
     </script>
   </head>
 
@@ -87,9 +138,12 @@
         <td><div id="chart_div" style="border: 1px solid #ccc"></div></td>
         <td><div id="chart_div2" style="border: 1px solid #ccc"></div></td>
       </tr>
+      <tr>
+        <td colspan="2"><div id="chart_div3" style="border: 1px solid #ccc"></div></td>
+      </tr>
     </table>
     <!--Div that will hold the pie chart-->
     <!-- <div id="chart_div"></div>
-    <div id="chart_div2"></div> -->
-  </body>
-  </html>
+      <div id="chart_div2"></div> -->
+    </body>
+    </html>
