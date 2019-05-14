@@ -51,7 +51,36 @@ class GoogleAnalytics extends Controller
 			$c = $c + 1;
 		}
 
-    	return view('googlechart',compact('countries','visitors','testdata'));
+
+		$visitorByGagdet = Analytics::fetchVisitorByGagdet(Period::years(1));
+		// dd($visitorByGagdet);
+
+		//Get Total Visitor by each gagdet
+		$g = 0;
+		$getVisitorByGagdet = array();
+		foreach ($visitorByGagdet as $totalVisitorsByGagdet) 
+		{
+			$getVisitorByGagdet[] = $visitorByGagdet[$g]['users'];
+			$g = $g + 1;
+			# code...
+		}
+
+		//Get Gagdet/Browser
+		$gdt=0;
+		$gagdet = array();
+		foreach ($visitorByGagdet as $totalVisitorsByGagdet) 
+		{	
+			$gagdet[] = $visitorByGagdet[$gdt]['browser'];
+			$gdt = $gdt + 1;
+			# code...
+		}
+		// dd($gagdet);
+
+
+
+		// dd($getVisitorByGagdet);
+
+    	return view('googlechart',compact('countries','visitors','getVisitorByGagdet','gagdet'));
     }
 
 	public function googleMagic()
