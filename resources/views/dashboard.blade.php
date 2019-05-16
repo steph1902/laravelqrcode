@@ -41,13 +41,13 @@
 	<div class="container-fluid">
 		<div class="container-fluid">
 			<br />
-    @if (\Session::has('success'))
-        <div class="alert alert-success">
-            <p>{{ \Session::get('success') }}</p>
-        </div><br />
-    @endif
-			<p class="text-left"><p class="font-weight-light">Kredit</p></p>
-			<p class="text-left"><p class="font-weight-light">2/10</p></p>
+			@if (\Session::has('success'))
+			<div class="alert alert-success">
+				<p>{{ \Session::get('success') }}</p>
+			</div><br />
+			@endif
+			<!-- <p class="text-left"><p class="font-weight-light">Kredit</p></p> -->
+			<!-- <p class="text-left"><p class="font-weight-light">2/10</p></p> -->
 
 			<form method="POST" action="{{ url('addurl') }}">
 				@csrf
@@ -81,7 +81,9 @@
 							</a>
 						</td>
 						<td>
-							<img src="{{ asset('svg/graph.svg') }}" alt="icon name" class="icon">
+							<a href="{{ url('googlechart') }}">
+								<img src="{{ asset('svg/graph.svg') }}" alt="icon name" class="icon">
+							</a>
 						</td>
 						<!-- <td>Otto</td> -->
 						<!-- <td>@mdo</td> -->

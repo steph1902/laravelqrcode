@@ -187,7 +187,7 @@
             <table class="table">
               <tr>
                 <td>
-                            <label for="start_date">Start Date</label>
+                  <label for="start_date">Start Date</label>
 
                   <input type="date" name="start_date" class="form-control">
                 </td>
@@ -195,17 +195,20 @@
                   <label for="end_date">End Date</label>
                   <input type="date" name="end_date" class="form-control">
                 </td>
-                <td><button type="submit" class="btn btn-primary float-right">Apply</button></td>
-                <td> 
+                <td>
+                  <label for="Apply">&nbsp</label><td>
+                    <button type="submit" class="btn btn-primary float-right">Apply</button>
+                  </td>
+                <!-- <td> 
                   <a href="{{ url('downloadcsv') }}"> 
                     <img src="{{ asset('svg/data-transfer-download.svg') }}" alt="icon name" class="icon"> 
                   </a>
-                </td>
-                <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>            
+                </td> -->
+                <!-- <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>             -->
               </tr>
               
               <tr>
-                <td><label for="start_date">Start Date</label></td>
+                <td><label for="start_date">Download Visitors by Geographic</label></td>
                 <td>
                   <a href="{{ url('downloadcsv') }}"> 
                     <img src="{{ asset('svg/data-transfer-download.svg') }}" alt="icon name" class="icon"> 
@@ -214,19 +217,19 @@
               </tr>
 
               <tr>
-                <td><label for="start_date">Start Date</label></td>
+                <td><label for="start_date">Download Visitors by Gagdet</label></td>
                 <td>
-                  <a href="{{ url('') }}"> 
+                  <a href="{{ url('downloadvisitorbygagdet') }}"> 
                     <img src="{{ asset('svg/data-transfer-download.svg') }}" alt="icon name" class="icon"> 
                   </a>
                 </td>
               </tr>
 
               <tr>
-                <td><label for="start_date">Start Date</label></td>
-                <td><a href="{{ url('') }}"> 
-                    <img src="{{ asset('svg/data-transfer-download.svg') }}" alt="icon name" class="icon"> 
-                  </a></td>
+                <td><label for="start_date">Download Daily Visitors</label></td>
+                <td><a href="{{ url('downloaddailyvisitor') }}"> 
+                  <img src="{{ asset('svg/data-transfer-download.svg') }}" alt="icon name" class="icon"> 
+                </a></td>
               </tr>
             </table>
           </form>

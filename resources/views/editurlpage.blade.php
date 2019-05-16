@@ -59,7 +59,7 @@
 			</div>
 
 			<div class="card-body">Your URL here<br>
-				<input class="form-control col-sm-5" type="text">
+				<input class="form-control col-sm-5" type="text" name="url" placeholder="{{ $url->url }}" >
 			</div>
 
 			<div class="card-body">

@@ -11,15 +11,55 @@ use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AnalyticsExport;
+use App\Exports\VisitorByGagdet;
+use App\Exports\DailyVisitor;
+use App\URL;
 
 class GoogleAnalytics extends Controller
 {
+	// public function editUrl(Requ)
+ //    {
+ //        // $url = url::where('id', '=' , $id)->first();
+ //        $url = url::find($id);
+ //        // dd($url);
+ //        // 
+ //        $url->url = $request->get('url');
+ //        // dd($request->get('url'));
+ //        $url->save();
+
+ //        return redirect('dashboard')->with('success','Edited URL successfully');
+
+ //    }
+
+	public function redirectingPage($id)
+	{
+		// $
+		$url = url::find($id);
+		$longurl = $url->url;
+		// dd($longurl);
+
+		return view('redirectingpage',compact('longurl'));
+	}
 
 	public function export() 
 	{
-		$visitorByGeo = Analytics::fetchVisitor(Period::years(1));
+		// $visitorByGeo = Analytics::fetchVisitor(Period::years(1));
 		// dd($visitorByGeo);
-		return Excel::download(new AnalyticsExport, 'analytics.csv');
+		return Excel::download(new AnalyticsExport, 'Visitors by Geographic.csv');
+	}
+
+	public function exportVisitorByGagdet() 
+	{
+		// $visitorByGeo = Analytics::fetchVisitor(Period::years(1));
+		// dd($visitorByGeo);
+		return Excel::download(new VisitorByGagdet, 'Visitors by Gagdet.csv');
+	}
+
+	public function exportDailyVisitor() 
+	{
+		// $visitorByGeo = Analytics::fetchVisitor(Period::years(1));
+		// dd($visitorByGeo);
+		return Excel::download(new DailyVisitor, 'Daily Visitors.csv');
 	}
 
 	public function googleMultiChart()

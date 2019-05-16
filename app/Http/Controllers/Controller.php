@@ -88,33 +88,7 @@ class Controller extends BaseController
 
     }
 
-    //go to update page
-    public function edit($id)
-    {
-        $car = Car::find($id);
-        return view('caredit',compact('car','id'));
-    }
 
-    public function update(Request $request,$id)
-    {
-        $car = Car::find($id);
-        $car->carcompany = $request->get('carcompany');
-        $car->model = $request->get('model');
-        $car->price = $request->get('price');
-
-        $validatedData = $request->validate
-        (
-            [
-                'carcompany'=>'required',
-                'model'=>'required',
-                'price'=>'required','digits_between:min=1,max=1000000'
-            ]
-        );
-
-        $car->save();
-
-        return redirect('car')->with('success','Car has been successfully updated');
-    }
     public function getEditUrlPage($id)
     {
         $url = url::find($id);
@@ -125,7 +99,9 @@ class Controller extends BaseController
         // $url = url::where('id', '=' , $id)->first();
         $url = url::find($id);
         // dd($url);
+        // 
         $url->url = $request->get('url');
+        // dd($request->get('url'));
         $url->save();
 
         return redirect('dashboard')->with('success','Edited URL successfully');

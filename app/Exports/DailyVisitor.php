@@ -12,7 +12,7 @@ use Illuminate\Support\Arr;
 use Khill\Lavacharts\Lavacharts;
 use Carbon\Carbon;
 
-class VisitorByGagdet implements FromCollection
+class DailyVisitor implements FromCollection
 {
     public function collection()
     {
@@ -21,7 +21,10 @@ class VisitorByGagdet implements FromCollection
         // $visitorByGeo = Analytics::fetchVisitor(Period::years(1));
         // return $visitorByGeo;
 
-        $visitorByGagdet = Analytics::fetchVisitorByGagdet(Period::years(1));
-        return $visitorByGagdet;
+        // $visitorByGagdet = Analytics::fetchVisitorByGagdet(Period::years(1));
+        // return $visitorByGagdet;
+
+        $dailyVisit = Analytics::fetchTotalVisitorsAndPageViews(Period::days(7));
+        return $dailyVisit;
     }
 }

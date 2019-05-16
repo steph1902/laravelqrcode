@@ -15,9 +15,13 @@ Route::get('/', function () {
 	return view('welcome');
 });
 
+Route::get('redirect/{id}','GoogleAnalytics@redirectingPage');
+
 Route::get('googlechart','GoogleAnalytics@googleChart');
 
 Route::get('downloadcsv','GoogleAnalytics@export');
+Route::get('downloadvisitorbygagdet','GoogleAnalytics@exportVisitorByGagdet');
+Route::get('downloaddailyvisitor','GoogleAnalytics@exportDailyVisitor');
 // Route::get('googlechart/{search}','GoogleAnalytics@googleChart');
 
 Route::post('refreshchart','GoogleAnalytics@refreshChart');
