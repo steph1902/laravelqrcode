@@ -15,6 +15,13 @@ Route::get('/', function () {
 	return view('welcome');
 });
 
+Route::get('googlechart','GoogleAnalytics@googleChart');
+
+Route::get('downloadcsv','GoogleAnalytics@export');
+// Route::get('googlechart/{search}','GoogleAnalytics@googleChart');
+
+Route::post('refreshchart','GoogleAnalytics@refreshChart');
+
 Route::get('dashboard','Controller@dashboard')->middleware('auth');
 
 Route::get('changepasswordpage','Controller@getChangePassPage')->name('Change Password Page')->middleware('auth');
@@ -31,7 +38,7 @@ Route::get('statistic','Controller@getStatisticPage')->middleware('auth');
 
 Route::get('googleanalytics','GoogleAnalytics@googleMagic');
 
-Route::get('googlechart','GoogleAnalytics@googleChart');
+
 
 Route::get('multiplechart','GoogleAnalytics@googleMultiChart');
 

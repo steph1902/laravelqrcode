@@ -164,6 +164,7 @@ return [
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         Spatie\Analytics\AnalyticsServiceProvider::class,
         Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
 
         /*
@@ -231,7 +232,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
-            'Lava' => Khill\Lavacharts\Laravel\LavachartsFacade::class,
+        'Lava' => Khill\Lavacharts\Laravel\LavachartsFacade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
 
 
 

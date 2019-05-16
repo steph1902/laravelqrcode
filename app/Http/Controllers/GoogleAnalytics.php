@@ -8,24 +8,94 @@ use Spatie\Analytics\Period;
 use Illuminate\Support\Arr;
 use Khill\Lavacharts\Lavacharts;
 use Carbon\Carbon;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\AnalyticsExport;
 
 class GoogleAnalytics extends Controller
 {
+
+	public function export() 
+	{
+		$visitorByGeo = Analytics::fetchVisitor(Period::years(1));
+		// dd($visitorByGeo);
+		return Excel::download(new AnalyticsExport, 'analytics.csv');
+	}
+
 	public function googleMultiChart()
 	{
 		return view('multiplechart');
 	}
 
+	public function refreshChart(Request $request)
+	{
+		// dd('here');
+
+		$request->validate(
+			[
+				'start_date'=>'required',
+				'end_date'=> 'required|after:start_date',
+
+			]);
+
+		$start_date = $request->get('start_date');
+		$end_date = $request->get('end_date');
+
+		$start_date = Carbon::createFromFormat('Y-m-d',$start_date);
+		$end_date = Carbon::createFromFormat('Y-m-d',$end_date);
+		
+		$difference = $end_date->diffInDays($start_date);
+
+		// dd($difference);
+		$visitorByGeo = Analytics::fetchVisitor(Period::days($difference));
+		// dd($visitorByGeo);
+		// return view('googlechart')->with('success','Chart updated');
+	}
+
     //Total Visitors by Geographic
-	public function googleChart()
+	public function googleChart(Request $request)
 	{
 
+		if($request->has('start_date') && $request->has('end_date'))
+		{
+			// dd('here');
+			$request->validate(
+				[
+					'start_date'=>'required',
+					'end_date'=> 'required|after:start_date',
+
+				]);
+
+			$start_date = $request->get('start_date');
+			$end_date = $request->get('end_date');
+
+			$start_date = Carbon::createFromFormat('Y-m-d',$start_date);
+			$end_date = Carbon::createFromFormat('Y-m-d',$end_date);
+			
+			$difference = $end_date->diffInDays($start_date);	
+
+			$visitorByGeo = Analytics::fetchVisitor(Period::days($difference));
+			$visitorByGagdet = Analytics::fetchVisitorByGagdet(Period::days($difference));
+			$dailyVisit = Analytics::fetchTotalVisitorsAndPageViews(Period::days($difference));
+		}
+		else
+		{
+			$visitorByGeo = Analytics::fetchVisitor(Period::years(1));
+			$visitorByGagdet = Analytics::fetchVisitorByGagdet(Period::years(1));
+			$dailyVisit = Analytics::fetchTotalVisitorsAndPageViews(Period::days(7));
+
+		}
+		
+
+		// dd($difference);
+		// $visitorByGeo = Analytics::fetchVisitor(Period::days($difference));
     	/*
 			Chart 1
 
     	*/
 
-			$visitorByGeo = Analytics::fetchVisitor(Period::years(1));
+			
+			// dd($visitorByGeo);
 		$i = 0; //visitors
 		$a = 0; //countries
 		// echo $i;
@@ -62,7 +132,7 @@ class GoogleAnalytics extends Controller
 
     	*/
 
-			$visitorByGagdet = Analytics::fetchVisitorByGagdet(Period::years(1));
+			
 		// dd($visitorByGagdet);
 
 		//Get Total Visitor by each gagdet
@@ -92,7 +162,7 @@ class GoogleAnalytics extends Controller
 
     	*/
 
-			$dailyVisit = Analytics::fetchTotalVisitorsAndPageViews(Period::days(7));
+			
 
 			$dvt = 0;
 			$dailyVisitDate = array();
@@ -100,8 +170,8 @@ class GoogleAnalytics extends Controller
 			foreach($dailyVisit as $dailyVisitByDate)
 			{
 					// $dailyVisitDate[] = Carbon::createFromFormat('Ymd', $dailyVisit[$dvt]['date']);
-					$dailyVisitDate[] = $dailyVisit[$dvt]['date'];
-					$dvt = $dvt + 1;
+				$dailyVisitDate[] = $dailyVisit[$dvt]['date'];
+				$dvt = $dvt + 1;
 			}
 			// dd($dailyVisitDate);
 
@@ -110,8 +180,8 @@ class GoogleAnalytics extends Controller
 			//get daily visitor
 			foreach ($dailyVisit as $dailyVisitorsByDate) 
 			{		
-					$dailyVisitors[] = $dailyVisit[$dvts]['visitors'];
-					$dvts = $dvts + 1;
+				$dailyVisitors[] = $dailyVisit[$dvts]['visitors'];
+				$dvts = $dvts + 1;
 			}
 
 			// dd($dailyVisit);
@@ -122,8 +192,8 @@ class GoogleAnalytics extends Controller
 
 			foreach($dailyVisit as $dailyPageViews)
 			{
-					$dailyPageView[] = $dailyVisit[$dpv]['pageViews'];
-					$dpv = $dpv + 1;
+				$dailyPageView[] = $dailyVisit[$dpv]['pageViews'];
+				$dpv = $dpv + 1;
 			}
 
 			
@@ -131,16 +201,15 @@ class GoogleAnalytics extends Controller
 
 		// dd($getVisitorByGagdet);
 
-			return view('googlechart',compact('countries','visitors','getVisitorByGagdet','gagdet','dailyVisitDate','dailyVisitors','dailyPageView'));
+			return view('googlechart'
+				,compact('countries',
+					'visitors',
+					'getVisitorByGagdet',
+					'gagdet',
+					'dailyVisitDate',
+					'dailyVisitors',
+					'dailyPageView'));
 		}
 
-		public function googleMagic()
-		{
-
-			$total_visitors_by_geo = Analytics::fetchTotalVisitorByGeographic(Period::years(1));
-			dd($total_visitors_by_geo);
-
-		// return view('statistic',compact('total_visitors_by_geo'));
-
-		}	
+		
 	}

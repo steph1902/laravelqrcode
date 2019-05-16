@@ -149,7 +149,7 @@
 
 
     <nav class="navbar navbar-light bg-light justify-content-between">
-      <a class="navbar-brand">QR Code - Edit URL Page</a>
+      <a class="navbar-brand">Google Analytics Report</a>
 
       <form class="form-inline">
         <!-- <input class="form-control <main></main>r-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
@@ -167,32 +167,75 @@
       </form>
     </nav>
 
-   
+
 
     
-   
-  <div class="container-fluid">
+
+    <div class="container-fluid">
       <div class="container-fluid">
+
+        
+
         <div class="card-body"> 
-          Range Waktu
-          <table class="table">
-            <tr>
-              <td><input type="date"></td>
-              <td><input type="date"></td>
-              <td><button type="submit" class="btn btn-primary float-right">Apply</button></td>
-              <td> 
-                <a href=""> 
-                  <img src="{{ asset('svg/data-transfer-download.svg') }}" alt="icon name" class="icon"> 
-                </a>
-              </td>
-              <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>            
-            </tr>
-          </table>
+          <div class="card-body">
+            Range Waktu <br>
+            (Default: 1 Year for Geographic and Gagdet, 7 days for Daily Visitors)<br>
+
+          </div>
+          <form method="GET" action="{{ action('GoogleAnalytics@googleChart') }}">
+            @csrf
+            <table class="table">
+              <tr>
+                <td>
+                            <label for="start_date">Start Date</label>
+
+                  <input type="date" name="start_date" class="form-control">
+                </td>
+                <td>
+                  <label for="end_date">End Date</label>
+                  <input type="date" name="end_date" class="form-control">
+                </td>
+                <td><button type="submit" class="btn btn-primary float-right">Apply</button></td>
+                <td> 
+                  <a href="{{ url('downloadcsv') }}"> 
+                    <img src="{{ asset('svg/data-transfer-download.svg') }}" alt="icon name" class="icon"> 
+                  </a>
+                </td>
+                <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>            
+              </tr>
+              
+              <tr>
+                <td><label for="start_date">Start Date</label></td>
+                <td>
+                  <a href="{{ url('downloadcsv') }}"> 
+                    <img src="{{ asset('svg/data-transfer-download.svg') }}" alt="icon name" class="icon"> 
+                  </a>
+                </td>
+              </tr>
+
+              <tr>
+                <td><label for="start_date">Start Date</label></td>
+                <td>
+                  <a href="{{ url('') }}"> 
+                    <img src="{{ asset('svg/data-transfer-download.svg') }}" alt="icon name" class="icon"> 
+                  </a>
+                </td>
+              </tr>
+
+              <tr>
+                <td><label for="start_date">Start Date</label></td>
+                <td><a href="{{ url('') }}"> 
+                    <img src="{{ asset('svg/data-transfer-download.svg') }}" alt="icon name" class="icon"> 
+                  </a></td>
+              </tr>
+            </table>
+          </form>
+          
         </div>
       </div>
     </div>
 
-     <div class="container-fluid">
+    <div class="container-fluid">
       <div class="container-fluid">
         <div class="card-body">
          <!--Table and divs that hold the pie charts-->
