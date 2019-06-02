@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2019 at 04:00 PM
+-- Generation Time: May 16, 2019 at 06:38 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -81,7 +81,8 @@ INSERT INTO `url` (`id`, `url`, `short_url`, `svg`, `user_id`, `created_at`, `up
 (4, NULL, 'http://domain.com/Zel3p', NULL, 1, '2019-05-08 08:35:49', '2019-05-08 08:35:49'),
 (5, NULL, 'http://domain.com/hos0z', NULL, 1, '2019-05-08 08:35:49', '2019-05-08 08:35:49'),
 (6, NULL, 'http://domain.com/Wt2pX', NULL, 1, '2019-05-08 08:35:49', '2019-05-08 08:35:49'),
-(7, NULL, 'http://domain.com/JOwhT', NULL, 2, '2019-05-14 04:39:50', '2019-05-14 04:39:50');
+(7, NULL, 'http://domain.com/JOwhT', NULL, 2, '2019-05-14 04:39:50', '2019-05-14 04:39:50'),
+(8, 'http://www.stempel-jogja.com/', 'http://domain.com/cNC0I', NULL, 2, '2019-05-16 08:16:08', '2019-05-16 08:21:18');
 
 -- --------------------------------------------------------
 
@@ -151,7 +152,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `url`
 --
 ALTER TABLE `url`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
